@@ -1,0 +1,40 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: #1f8fad;
+}
+.head {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: "Oswald", sans-serif;
+  font-size: 2.5rem;
+  height: 15dvh;
+}
+.main-page {
+  display: flex;
+  width: 80%;
+  height: 80dvh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.board {
+  border: 1px solid white;
+  min-height: 200px;
+  flex-grow: 1;
+}
+main {
+  display: flex;
+  justify-content: center;
+}
+.flex {
+  display: flex;
+}
+.row {
+  width: 100%;
+}
