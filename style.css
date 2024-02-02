@@ -4,6 +4,9 @@
 }
 body {
   background-color: #1f8fad;
+  display: grid;
+  grid-template-rows: min-content 1fr;
+  height: 100dvh;
 }
 .head {
   display: flex;
@@ -12,29 +15,51 @@ body {
   align-items: center;
   color: white;
   font-family: "Oswald", sans-serif;
-  font-size: 2.5rem;
-  height: 15dvh;
-}
-.main-page {
-  display: flex;
-  width: 80%;
-  height: 80dvh;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  font-size: 2rem;
+  text-align: center;
 }
 .board {
-  border: 1px solid white;
-  min-height: 200px;
-  flex-grow: 1;
-}
-main {
+  border: 8px solid white;
   display: flex;
   justify-content: center;
+  align-items: center;
+  width: clamp(60px, min(26vw, 18vh), 180px);
+  height: clamp(60px, min(26vw, 18vh), 180px); /* Added height to match width */
+}
+main {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  position: relative;
 }
 .flex {
   display: flex;
 }
 .row {
   width: 100%;
+  justify-content: center;
+}
+.gameboard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+.turn {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.score {
+  border: 5px solid rgb(255, 255, 255);
+  display: flex;
+  width: clamp(150px, 70%, 250px);
+  height: 45px;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  font-size: 2rem;
 }

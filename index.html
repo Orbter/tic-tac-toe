@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="script.js"></script>
+    <script defer src="script.js"></script>
     <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,24 +16,81 @@
   <body>
     <header>
       <div class="head"><h1>Tic Tac Toe</h1></div>
+      <div class="turn">
+        <div class="X-turn score">
+          <svg
+            version="1.0"
+            xmlns="http://www.w3.org/2000/svg"
+            width="30px"
+            height="38px"
+            viewBox="0 0 500.000000 500.000000"
+            preserveAspectRatio="xMidYMid meet"
+          >
+            <g
+              transform="translate(0.000000,500.000000) scale(0.100000,-0.100000)"
+              fill="#ffffff"
+              stroke="none"
+            >
+              <path
+                d="M380 4953 c-210 -57 -350 -238 -350 -452 0 -88 22 -175 63 -243 14
+-24 411 -428 881 -898 l856 -855 -859 -860 c-472 -473 -872 -881 -889 -906
+-50 -75 -74 -161 -74 -264 1 -105 22 -176 77 -260 90 -136 280 -206 475 -176
+164 26 100 -31 1060 928 476 474 870 863 875 863 5 0 397 -386 870 -859 971
+-969 903 -911 1084 -933 226 -28 405 61 497 246 73 150 66 316 -21 457 -15 24
+-417 432 -893 906 l-867 861 851 854 c532 532 861 870 877 898 44 79 60 153
+55 257 -5 85 -9 102 -46 176 -23 47 -59 100 -84 124 -132 128 -316 172 -484
+116 -109 -36 -162 -85 -1009 -932 l-829 -830 -846 843 c-465 463 -866 857
+-893 875 -104 71 -256 96 -377 64z"
+              />
+            </g>
+          </svg>
+
+          <div>1</div>
+        </div>
+        <div class="o-turn score">
+          <svg
+            version="1.0"
+            xmlns="http://www.w3.org/2000/svg"
+            width="30px"
+            height="38px"
+            viewBox="0 0 500.000000 500.000000"
+            preserveAspectRatio="xMidYMid meet"
+          >
+            <g
+              transform="translate(0.000000,500.000000) scale(0.100000,-0.100000)"
+              fill="#ffffff"
+              stroke="none"
+            >
+              <path
+                d="M2240 4980 c-236 -19 -552 -107 -806 -225 -330 -153 -645 -404 -886
+           -705 -216 -271 -385 -619 -468 -965 -63 -264 -74 -390 -61 -695 13 -286 47
+           -470 131 -710 58 -164 68 -186 135 -321 118 -235 250 -416 454 -620 271 -270
+           547 -448 896 -577 299 -111 532 -152 872 -152 377 0 663 61 1021 220 410 180
+           790 503 1048 886 80 120 195 349 254 507 112 302 160 562 160 867 0 223 -10
+           327 -46 490 -56 249 -121 435 -224 645 -214 434 -554 792 -992 1044 -248 142
+           -556 250 -848 296 -123 19 -483 28 -640 15z m555 -880 c551 -95 1035 -505
+           1238 -1051 172 -459 110 -1002 -161 -1419 -454 -700 -1319 -951 -2067 -600
+           -372 174 -678 504 -829 897 -191 494 -118 1070 191 1507 81 114 298 328 408
+           403 370 250 778 338 1220 263z"
+              />
+            </g>
+          </svg>
+
+          <div>2</div>
+        </div>
+      </div>
     </header>
     <main>
-      <div class="main-page">
-        <div class="first-row flex row">
-          <div class="board" id="1"></div>
-          <div class="board" id="2"></div>
-          <div class="board" id="3"></div>
-        </div>
-        <div class="second-row flex row">
-          <div class="board" id="4"></div>
-          <div class="board" id="5"></div>
-          <div class="board" id="6"></div>
-        </div>
-        <div class="third-row flex row">
-          <div class="board" id="7"></div>
-          <div class="board" id="8"></div>
-          <div class="board" id="9"></div>
-        </div>
+      <div class="gameboard">
+        <div class="board" id="0"></div>
+        <div class="board" id="1"></div>
+        <div class="board" id="2"></div>
+        <div class="board" id="3"></div>
+        <div class="board" id="4"></div>
+        <div class="board" id="5"></div>
+        <div class="board" id="6"></div>
+        <div class="board" id="7"></div>
+        <div class="board" id="8"></div>
       </div>
     </main>
   </body>

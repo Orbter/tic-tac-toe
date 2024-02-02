@@ -4,6 +4,8 @@ const gameBoard = [
   [, , ,],
 ];
 console.log(gameBoard);
+let board = document.querySelector(".gameboard");
+let turn;
 
 function matrixLength(board) {
   const numberOfRows = board.length;
@@ -102,7 +104,53 @@ const User = function (user, opponent) {
   this.opponent = opponent;
 };
 
+function whoTurn(turn) {
+  if (turn === undefined) {
+    return true;
+  } else {
+    return !turn;
+  }
+}
+
 function playersChoice(player1, player2) {
-  User(player1, player2);
-  while (!checkIfWin(gameBoard)) {}
+  child = event.target;
+  console.log(child);
+  if (child.classList.contains("played")) {
+    return;
+  } else {
+    const userInstance = new User(player1, player2);
+    const user = userInstance.user;
+    const opponent = userInstance.opponent;
+    let container;
+    let symbol = document.createElement("img");
+    container = event.target.id;
+    container = parseInt(container);
+    turn = whoTurn(turn);
+
+    if (turn) {
+      symbol.src = "imgs/close__2_-removebg-preview.svg";
+      symbol.alt = "X";
+      insertPlayArray(gameBoard, container, "X");
+    } else {
+      symbol.alt = "O";
+      symbol.src = "imgs/o-removebg-preview.svg";
+      insertPlayArray(gameBoard, container, "O");
+    }
+    console.log(gameBoard);
+    child.appendChild(symbol);
+    child.classList.add("played");
+  }
+}
+
+board.addEventListener("click", function (event) {
+  if (event.target.classList.contains("board")) {
+    playersChoice("Player1Name", "Player2Name");
+    console.log(checkIfWin(gameBoard));
+  }
+});
+function insertPlayArray(board, counter, objects) {
+  //when yotam cheks this was made with chat gtp i am sry
+  const row = Math.floor(counter / 3);
+  const col = counter % 3;
+  board[row][col] = objects;
 }
