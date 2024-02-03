@@ -5,8 +5,8 @@ const gameBoard = [
 ];
 let board = document.querySelector(".gameboard");
 let turn;
-const overlay = document.getElementById("overlay");
-
+let playerScore = 0;
+let opponentScore = 0;
 function matrixLength(board) {
   const numberOfRows = board.length;
   const numberOfColumns = board[0].length;
@@ -188,10 +188,19 @@ function restart() {
 }
 
 board.addEventListener("click", function (event) {
+  const OScore = document.querySelector(".o-score");
+  const XScore = document.querySelector(".X-score");
   if (event.target.classList.contains("board")) {
     if (!isBoardFull(gameBoard)) {
       let move = playersChoice();
       if (checkIfWin(gameBoard)) {
+        if (move === "X") {
+          playerScore++;
+          XScore.innerText = playerScore;
+        } else {
+          opponentScore++;
+          OScore.innerText = opponentScore;
+        }
         popUP(move);
       }
       if (isBoardFull(gameBoard)) {
@@ -200,6 +209,13 @@ board.addEventListener("click", function (event) {
       }
     } else {
       if (checkIfWin(gameBoard)) {
+        if (move === "X") {
+          playerScore++;
+          XScore.innerText = playerScore;
+        } else {
+          opponentScore++;
+          OScore.innerText = opponentScore;
+        }
         popUP(move);
       } else {
         move = "Tie";
@@ -218,9 +234,21 @@ function insertPlayArray(board, counter, objects) {
 console.log(gameBoard[1][1]);
 
 function popUP(move) {
+  const overlay = document.getElementById("overlay");
   overlay.classList.add("overlay");
   const result = document.querySelector(".result");
-  result.classList.remove("fade-out");
-  result.style.display = "block";
-  result.classList.add("fade-in");
+  const paragraph = document.querySelector(".paragraph");
+  result.classList.add("fade-in-pop");
+  if (move !== "Tie") {
+    paragraph.innerText = `${move} Wins!`;
+  } else {
+    paragraph.innerText = "Tie";
+  }
+}
+function restartGame() {
+  const overlay = document.getElementById("overlay");
+  restart();
+  const result = document.querySelector(".result");
+  result.classList.remove("fade-in-pop");
+  overlay.classList.remove("overlay");
 }

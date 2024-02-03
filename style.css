@@ -78,10 +78,6 @@ main {
   opacity: 1;
 }
 
-.display-none {
-  display: none; /* Make sure this class is correctly applied to hide the overlay */
-}
-
 .fade-out {
   opacity: 0;
 }
@@ -124,10 +120,20 @@ main {
   flex-direction: column;
   gap: 100px;
   border-radius: 10px;
-  display: none;
-  transition: opacity 10s ease-in-out; /* Transition effect */
+  opacity: 0; /* Start fully transparent */
+  visibility: hidden; /* Make element not visible */
+  pointer-events: none; /* Prevent interaction */
+  transition: opacity 1s ease-in;
 }
-
+.result.fade-in-pop {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto; /* Enable interaction */
+  transition-delay: 0s; /* Apply visibility transition effect immediately */
+}
+.display-none {
+  display: none; /* Make sure this class is correctly applied to hide the overlay */
+}
 .paragraph {
   color: white;
   font-family: "Poppins", sans-serif;
