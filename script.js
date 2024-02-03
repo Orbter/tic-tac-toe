@@ -60,7 +60,6 @@ function diagonal(board) {
   let { numberOfRows, numberOfColumns } = matrixLength(board);
   let isWin = true;
 
-  // Check top-left to bottom-right diagonal
   let currentNumber = board[0][0];
   for (let i = 1; i < numberOfRows && i < numberOfColumns; i++) {
     if (!currentNumber || board[i][i] !== currentNumber) {
@@ -68,12 +67,9 @@ function diagonal(board) {
       break;
     }
   }
-
   if (isWin) {
     return true;
   }
-
-  // Check top-right to bottom-left diagonal
   isWin = true;
   currentNumber = board[0][numberOfColumns - 1];
   for (let i = 1; i < numberOfRows && i < numberOfColumns; i++) {
@@ -84,6 +80,16 @@ function diagonal(board) {
   }
 
   return isWin;
+}
+function displayNone() {
+  const screen = document.querySelector(".lets-play");
+  // Add the fade-out class to start the opacity transition
+  screen.classList.add("fade-out");
+
+  // Wait for the transition to complete before hiding
+  setTimeout(() => {
+    screen.style.display = "none";
+  }, 650); // Match the duration of the opacity transition
 }
 
 function checkIfWin(board) {
@@ -111,16 +117,27 @@ function whoTurn(turn) {
     return !turn;
   }
 }
+function isBoardFull(board) {
+  let test;
+  for (let row = 0; row < board.length; row++) {
+    for (let col = 0; col < board.length; col++) {
+      if (board[row][col] !== undefined || board[row][col] !== null) {
+        test = true;
+      } else {
+        test = false;
+        break;
+      }
+    }
+    return test;
+  }
+}
 
-function playersChoice(player1, player2) {
+function playersChoice() {
   child = event.target;
   console.log(child);
   if (child.classList.contains("played")) {
     return;
   } else {
-    const userInstance = new User(player1, player2);
-    const user = userInstance.user;
-    const opponent = userInstance.opponent;
     let container;
     let symbol = document.createElement("img");
     container = event.target.id;
@@ -144,8 +161,14 @@ function playersChoice(player1, player2) {
 
 board.addEventListener("click", function (event) {
   if (event.target.classList.contains("board")) {
-    playersChoice("Player1Name", "Player2Name");
-    console.log(checkIfWin(gameBoard));
+    if (isBoardFull(gameBoard)) {
+      playersChoice();
+      if (checkIfWin(gameBoard)) {
+        alert("win");
+      }
+    } else {
+      alert("tie");
+    }
   }
 });
 function insertPlayArray(board, counter, objects) {
