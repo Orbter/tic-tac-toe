@@ -64,7 +64,10 @@ main {
   font-size: 2rem;
 }
 .lets-play {
-  z-index: 1;
+  position: fixed; /* Changed from default to fixed */
+  top: 0;
+  left: 0;
+  z-index: 10; /* Ensure it's above all other content */
   height: 100vh;
   width: 100%;
   background-color: rgb(17, 16, 16);
@@ -75,8 +78,15 @@ main {
   opacity: 1;
 }
 
+.display-none {
+  display: none; /* Make sure this class is correctly applied to hide the overlay */
+}
+
 .fade-out {
   opacity: 0;
+}
+.fade-in {
+  opacity: 1;
 }
 .play-button {
   width: 250px;
@@ -97,4 +107,55 @@ main {
 }
 .play-button:active {
   font-size: 2rem;
+}
+.result {
+  width: 40%;
+  height: 50%;
+  min-width: 300px;
+  z-index: 5;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1f8fad;
+  flex-direction: column;
+  gap: 100px;
+  border-radius: 10px;
+  display: none;
+  transition: opacity 10s ease-in-out; /* Transition effect */
+}
+
+.paragraph {
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: 3rem;
+  font-weight: bold;
+  word-spacing: 5px;
+}
+.result-button {
+  font-family: "Poppins", sans-serif;
+  width: 250px;
+  height: 70px;
+  border-radius: 15px;
+  font-size: 2rem;
+  font-weight: bold;
+  background-color: rgb(6, 213, 255);
+  border: 1px solid rgb(6, 213, 255);
+  cursor: pointer;
+  color: white;
+}
+.result-button:active {
+  font-size: 1.8rem;
+}
+.overlay {
+  width: 100%;
+  height: 100dvh;
+  z-index: 4;
+  background-color: rgba(0, 0, 0, 0.329);
+  position: fixed; /* Changed from default to fixed */
+  top: 0;
+  left: 0;
 }

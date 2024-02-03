@@ -3,9 +3,9 @@ const gameBoard = [
   [, , ,],
   [, , ,],
 ];
-console.log(gameBoard);
 let board = document.querySelector(".gameboard");
 let turn;
+const overlay = document.getElementById("overlay");
 
 function matrixLength(board) {
   const numberOfRows = board.length;
@@ -89,7 +89,7 @@ function displayNone() {
   // Wait for the transition to complete before hiding
   setTimeout(() => {
     screen.style.display = "none";
-  }, 650); // Match the duration of the opacity transition
+  }, 650);
 }
 
 function checkIfWin(board) {
@@ -121,15 +121,14 @@ function isBoardFull(board) {
   let test;
   for (let row = 0; row < board.length; row++) {
     for (let col = 0; col < board.length; col++) {
-      if (board[row][col] !== undefined || board[row][col] !== null) {
-        test = true;
+      if (board[row][col] === undefined || board[row][col] === null) {
+        return false;
       } else {
-        test = false;
-        break;
+        test = true;
       }
     }
-    return test;
   }
+  return test;
 }
 
 function playersChoice() {
@@ -147,33 +146,81 @@ function playersChoice() {
     if (turn) {
       symbol.src = "imgs/close__2_-removebg-preview.svg";
       symbol.alt = "X";
+      symbol.classList.add("player-move");
       insertPlayArray(gameBoard, container, "X");
     } else {
       symbol.alt = "O";
       symbol.src = "imgs/o-removebg-preview.svg";
+      symbol.classList.add("player-move");
+
       insertPlayArray(gameBoard, container, "O");
     }
     console.log(gameBoard);
     child.appendChild(symbol);
     child.classList.add("played");
+    return symbol.alt;
   }
+}
+function restartArray(board) {
+  let { numberOfRows, numberOfColumns } = matrixLength(board);
+
+  for (let row = 0; row < numberOfRows; row++) {
+    for (let col = 0; col < numberOfColumns; col++) {
+      board[row][col] = undefined;
+    }
+  }
+}
+function restartImg() {
+  const tiles = document.querySelectorAll(".board");
+  tiles.forEach(function (tile) {
+    const images = tile.querySelectorAll("img");
+    tile.classList.remove("played");
+
+    images.forEach(function (image) {
+      image.remove(); // Correctly calls the remove method on each image
+    });
+  });
+}
+
+function restart() {
+  restartArray(gameBoard);
+  restartImg();
 }
 
 board.addEventListener("click", function (event) {
   if (event.target.classList.contains("board")) {
-    if (isBoardFull(gameBoard)) {
-      playersChoice();
+    if (!isBoardFull(gameBoard)) {
+      let move = playersChoice();
       if (checkIfWin(gameBoard)) {
-        alert("win");
+        popUP(move);
+      }
+      if (isBoardFull(gameBoard)) {
+        move = "Tie";
+        popUP(move);
       }
     } else {
-      alert("tie");
+      if (checkIfWin(gameBoard)) {
+        popUP(move);
+      } else {
+        move = "Tie";
+        popUP(move);
+      }
     }
   }
 });
+
 function insertPlayArray(board, counter, objects) {
-  //when yotam cheks this was made with chat gtp i am sry
+  //when yotam checks this was made with chat gtp i am sry
   const row = Math.floor(counter / 3);
   const col = counter % 3;
   board[row][col] = objects;
+}
+console.log(gameBoard[1][1]);
+
+function popUP(move) {
+  overlay.classList.add("overlay");
+  const result = document.querySelector(".result");
+  result.classList.remove("fade-out");
+  result.style.display = "block";
+  result.classList.add("fade-in");
 }
