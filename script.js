@@ -246,6 +246,7 @@ function popUP(move) {
   }
 }
 function restartGame() {
+  turn = undefined;
   const overlay = document.getElementById("overlay");
   restart();
   const result = document.querySelector(".result");
